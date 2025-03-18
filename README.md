@@ -3,7 +3,7 @@
 
 Repositorio criado localmente no github desktop. 
 
-Comandos utilizados 
+**Comandos utilizados** 
 git init para inicializar o projeto 
 git add para adicionar os arquivos 
 git commit para commitar localmente 
