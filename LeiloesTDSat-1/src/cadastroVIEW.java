@@ -7,6 +7,8 @@
  *
  * @author Adm
  */
+import javax.swing.JOptionPane;
+
 public class cadastroVIEW extends javax.swing.JFrame {
 
     /**
@@ -141,15 +143,20 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ProdutosDTO produto = new ProdutosDTO();
-        String nome = cadastroNome.getText();
-        String valor = cadastroValor.getText();
-        String status = "A Venda";
-        produto.setNome(nome);
-        produto.setValor(Integer.parseInt(valor));
-        produto.setStatus(status);
-        
-        ProdutosDAO produtodao = new ProdutosDAO();
-        produtodao.cadastrarProduto(produto);
+        conectaDAO conn = new conectaDAO();
+        if(!emptyFields()){
+            conn.connectDB();
+            String nome = cadastroNome.getText();
+            String valor = cadastroValor.getText();
+            String status = "A venda";
+            produto.setNome(nome);
+            produto.setValor(Integer.parseInt(valor));
+            produto.setStatus(status);
+            
+            ProdutosDAO produtodao = new ProdutosDAO();
+            produtodao.cadastrarProduto(produto);
+            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso.");
+        }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -192,6 +199,15 @@ public class cadastroVIEW extends javax.swing.JFrame {
             }
         });
     }
+    public boolean emptyFields(){
+        boolean isEmpty = true;
+        if(cadastroNome.getText().trim().isEmpty() || cadastroValor.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Por favor preencha todos os campos antes de cadastrar.");
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
@@ -206,3 +222,5 @@ public class cadastroVIEW extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }
+
+
